@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iminif/html-replace-webpack-plugin.git"
+    "url": "git+https://github.com/shehy/html-replace-webpack-plugin.git"
   },
   "keywords": [
     "html-replace-webpack-plugin",
@@ -18,12 +18,12 @@
     "plugin",
     "iminif"
   ],
-  "author": "aeiou <iminif@outlook.com>",
+  "author": "hisir",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iminif/html-replace-webpack-plugin/issues"
+    "url": "https://github.com/shehy/html-replace-webpack-plugin/issues"
   },
-  "homepage": "https://github.com/iminif/html-replace-webpack-plugin#readme",
+  "homepage": "https://github.com/shehy/html-replace-webpack-plugin#readme",
   "notes": {
     "2.2.7": "unpublished@2017-09-15 11:22"
   }
