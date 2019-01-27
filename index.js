@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 function HtmlReplaceWebpackPlugin(options) {
   options = Array.isArray(options) ? options : [options]
 
@@ -36,15 +38,20 @@ function HtmlReplaceWebpackPlugin(options) {
 }
 
 HtmlReplaceWebpackPlugin.prototype.apply = function(compiler) {
+  // webpack 4.x
   if (compiler.hooks) {
     compiler.hooks.compilation.tap('HtmlReplaceWebpackPlugin', compilation => {
-      if (compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing) {
-        compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync('HtmlReplaceWebpackPlugin', this.replace)
+      if (compilation.hooks && compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing) {
+        // HtmlWebpackPlugin older
+        compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync('html-webpack-plugin-before-html-processing', this.replace)
+      } else if (HtmlWebpackPlugin && HtmlWebpackPlugin.getHooks) {
+        // HtmlWebpackPlugin 4.x
+        HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync('HtmlReplaceWebpackPlugin', this.replace)
       } else {
         throw new Error('Please ensure that `html-webpack-plugin` was placed before `html-replace-webpack-plugin` in your Webpack config if you were working with Webpack 4.x!')
       }
     })
-  } else {
+  } else { // webpack older
     compiler.plugin('compilation', compilation => {
       compilation.plugin('html-webpack-plugin-before-html-processing', this.replace)
     })
